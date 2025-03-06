@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 
@@ -14,24 +14,66 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Hello Flutter')),
-        body: Container(
-          margin: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-          width: MediaQuery.of(context).size.width,
+        body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-          messageWidget('Hello', true),
-          messageWidget('Hi', false),
-          messageWidget('How\'s going?', true),
-          messageWidget('Super!', false),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [Text('seen')],
-          )
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Row 1',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(50),
+                    margin: EdgeInsets.only(left: 20, bottom: 50),
+                    color: Colors.black,
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Row 2',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 24,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    ),
+                    Container(
+                    padding: EdgeInsets.all(50),
+                    margin: EdgeInsets.only(left: 20, bottom: 50),
+                    color: Colors.green,
+                  )
+                ],
+              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Row 3',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(50),
+                      margin: EdgeInsets.only(left: 20, bottom: 50),
+                      color: Colors.red,
+                    )
+                  ],
+                )
+            ],
           ),
-        )
+        ),
       ),
     );
   }
