@@ -84,6 +84,7 @@ class _CalculatorScreenState extends State<CalculatorScreen>{
                           borderSide: BorderSide(color: Colors.blue, width: 2), // Border color when focused
                         ),
                         labelText: 'Number1',
+      
                         labelStyle: TextStyle(color: Colors.white)
                       ),
                     ),
