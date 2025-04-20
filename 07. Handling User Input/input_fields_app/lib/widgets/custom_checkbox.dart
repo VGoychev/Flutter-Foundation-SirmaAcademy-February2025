@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomCheckbox extends StatelessWidget{
+class CustomCheckbox extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
   final String label;
@@ -10,16 +10,15 @@ class CustomCheckbox extends StatelessWidget{
     required this.value,
     required this.onChanged,
     required this.label,
-    });
+  });
 
   @override
   Widget build(BuildContext context) {
-
     return CheckboxListTile(
       value: value,
       onChanged: onChanged,
-      title:Text(label),
-      controlAffinity: ListTileControlAffinity.leading,);
+      title: Text(label),
+      controlAffinity: ListTileControlAffinity.leading,
+    );
   }
-
 }

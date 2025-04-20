@@ -10,32 +10,60 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   late final TextEditingController usernameController;
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String currentText = '';
   bool agreedToTerms = false;
   String? pickedFruit;
   List<String> fruit = ['Apple', 'Banana', 'Orange'];
   bool switchValue = false;
   String switchText = 'OFF';
-
-   @override
+  String email = '';
+  Color currentColor = Colors.amber;
+  String containerText = '';
+  @override
   Widget build(BuildContext context) {
     return HomePageView(this);
   }
-
 
   @override
   void initState() {
     super.initState();
     usernameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
     usernameController.addListener(() {
       setState(() {
         currentText = usernameController.text;
       });
     });
-
   }
 
-  void toggleSwitch(bool value){
+  void tapContainer(){
+    setState(() {
+      currentColor = currentColor == Colors.amber ? Colors.blue : Colors.amber;
+      containerText = 'Tapped!';
+    });
+  }
+
+  void handleSwipe(DragUpdateDetails details){
+    setState(() {
+      if(details.delta.dx < 0){
+      containerText = 'Swiped Left!';
+      } else if (details.delta.dx > 0){
+        containerText = 'Swiped Right!';
+      }
+    });
+  }
+
+  void longPressContainer(){
+    setState(() {
+      containerText = 'Long Press Detected!';
+    });
+  }
+
+  void toggleSwitch(bool value) {
     setState(() {
       switchValue = value;
       switchText = switchValue ? 'ON' : 'OFF';
@@ -45,38 +73,34 @@ class HomePageState extends State<HomePage> {
   @override
   void dispose() {
     usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
-  void handleSubmit() {
-    String message;
-    final username = usernameController.text.trim();
-    if (username.isEmpty && !agreedToTerms && pickedFruit == null) {
-      message = 'Please enter a username, agree to the terms and pick a fruit.';
-    } else if (username.isEmpty && !agreedToTerms){
-      message = 'Please enter a username and agree to the terms.';
-    }else if (username.isEmpty) {
-      message = 'Please enter a username!';
-    } else if (!agreedToTerms) {
-      message = 'User: $username hasn\'t agreed to the terms.';
-    } else if (pickedFruit == null) {
-      message = 'Please select a fruit';
-    }else {
-      message = 'Username: $username is correct and you agreed to the terms. The picked fruit is $pickedFruit';
+  void submitForm() {
+    if (formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Registration successful!',
+          ),
+        ),
+      );
       usernameController.clear();
-      setAgreement(false);
+      emailController.clear();
+      passwordController.clear();
+      setAgreement(null);
       setFruit(null);
     }
+  }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+  bool get isEnabled {
+    return agreedToTerms && pickedFruit != null;
   }
 
   void setAgreement(bool? value) =>
       setState(() => agreedToTerms = value ?? false);
 
-  void setFruit(String? value) =>
-      setState(() => pickedFruit = value);
-
+  void setFruit(String? value) => setState(() => pickedFruit = value);
 }
