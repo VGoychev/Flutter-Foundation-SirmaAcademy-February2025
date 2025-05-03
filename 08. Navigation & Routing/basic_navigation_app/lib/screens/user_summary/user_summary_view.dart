@@ -1,4 +1,3 @@
-import 'package:basic_navigation_app/model/Person.dart';
 import 'package:basic_navigation_app/screens/user_summary/user_summary_state.dart';
 import 'package:basic_navigation_app/utils/form_validator.dart';
 import 'package:basic_navigation_app/widgets/custom_textfield.dart';
