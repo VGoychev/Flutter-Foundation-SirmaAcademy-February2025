@@ -52,7 +52,7 @@ class RegistrationView extends StatelessWidget {
               height: 50,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 12, right: 12),
+              padding: EdgeInsets.only(left: 20, right: 20),
               child: CustomTextfield(
                 controller: state.nameCtrl,
                 validator: FormValidation.validateName,

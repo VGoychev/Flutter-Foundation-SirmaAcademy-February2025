@@ -55,7 +55,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/img/
+    - assets/img/imperial_symbol.png
+    - assets/img/resistance_symbol.png
+    - assets/img/path_background.jpeg
+    - assets/img/registration.jpeg
+    - assets/img/imperials.avif
+    - assets/img/rebels.jpg
+    - assets/img/star_wars_logo.png
   fonts:
     - family: Orbitron
       fonts:
