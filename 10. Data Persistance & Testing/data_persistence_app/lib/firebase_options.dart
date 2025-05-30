@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'your-daily-mood.firebasestorage.app',
     iosBundleId: 'com.example.dataPersistenceApp',
   );
-
 }
