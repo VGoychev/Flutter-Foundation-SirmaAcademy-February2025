@@ -1,5 +1,6 @@
 import 'package:data_persistence_app/screens/home/home.dart';
 import 'package:data_persistence_app/screens/registration/registration_view.dart';
+import 'package:data_persistence_app/services/auth_service.dart';
 import 'package:data_persistence_app/services/shared_prefs_service.dart';
 import 'package:flutter/material.dart';
 
@@ -15,14 +16,16 @@ class Registration extends StatefulWidget {
 
 class RegistrationState extends State<Registration> {
   final SharedPrefsService _prefsService = SharedPrefsService();
-  late final TextEditingController nameCtrl, passCtrl;
+  late final TextEditingController nameCtrl, passCtrl, emailCtrl;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  final _authService = AuthService();
+  String? _errorMessage;
   @override
   void initState() {
     super.initState();
     nameCtrl = TextEditingController();
     passCtrl = TextEditingController();
+    emailCtrl = TextEditingController();
 
     _initPrefs();
   }
@@ -34,15 +37,25 @@ class RegistrationState extends State<Registration> {
   void submitForm() async {
     if (formKey.currentState?.validate() ?? false) {
       try {
-        await _prefsService.setString('user_name', nameCtrl.text);
-        await _prefsService.setString('user_password', passCtrl.text);
+        final email = emailCtrl.text.trim();
+        final password = passCtrl.text;
+        final name = nameCtrl.text;
+
+        await _authService.signUp(email, password);
+
+        await _prefsService.setString('user_name', name);
+        await _prefsService.setString('user_password', password);
 
         if (mounted) {
           Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => Home(onToggleTheme: widget.onToggleTheme, themeMode: widget.themeMode)),
-        );
+            MaterialPageRoute(
+                builder: (_) => Home(
+                    onToggleTheme: widget.onToggleTheme,
+                    themeMode: widget.themeMode)),
+          );
           nameCtrl.clear();
           passCtrl.clear();
+          emailCtrl.clear();
         }
       } catch (e) {
         if (mounted) {

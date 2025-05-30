@@ -12,6 +12,15 @@ class HomeView extends StatelessWidget {
     final isDarkMode = state.widget.themeMode == ThemeMode.dark;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.logout,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Theme.of(context).colorScheme.primary,
+          ),
+        ),
         title: FutureBuilder<String>(
           future: state.getUserName(),
           builder: (context, snapshot) {
@@ -31,8 +40,10 @@ class HomeView extends StatelessWidget {
           IconButton(
             onPressed: state.widget.onToggleTheme,
             icon: Icon(
-              isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-              color: isDarkMode
+              Theme.of(context).brightness == Brightness.dark
+                  ? Icons.light_mode_outlined
+                  : Icons.dark_mode_outlined,
+              color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.white
                   : Theme.of(context).colorScheme.primary,
               size: 36,
@@ -72,7 +83,6 @@ class HomeView extends StatelessWidget {
               isExpanded: true,
               decoration: const InputDecoration(
                 labelText: 'Select Mood',
-        
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 14, horizontal: 16),
                 border: OutlineInputBorder(),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "690545641277",
+    "project_id": "your-daily-mood",
+    "storage_bucket": "your-daily-mood.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690545641277:android:1f03e4bb4874eaad2da754",
+        "android_client_info": {
+          "package_name": "com.example.data_persistence_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-ICuMp-tK9zPQ88F27jOzAbAxm8_lrVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

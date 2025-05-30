@@ -3,6 +3,8 @@ import 'package:data_persistence_app/screens/registration/registration.dart';
 import 'package:data_persistence_app/services/hive_service.dart';
 import 'package:data_persistence_app/services/shared_prefs_service.dart';
 import 'package:data_persistence_app/themes/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:flutter/material.dart';
@@ -10,6 +12,10 @@ import 'models/mood.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+   await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   try {
     final prefsService = SharedPrefsService();
@@ -21,7 +27,7 @@ void main() async {
     await hiveService.init();
     await prefsService.init();
     final isRegistered =
-        prefsService.getString('user_name')?.isNotEmpty ?? false;
+        prefsService.getString('user_email')?.isNotEmpty ?? false;
 
     runApp(MyApp(
       isRegistered: isRegistered,
